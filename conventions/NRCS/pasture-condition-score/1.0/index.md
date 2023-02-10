@@ -34,10 +34,12 @@ All indicator scores, as well as the overall pasture condition score MUST be
 recorded as quantities referenced by the log's "Quantities" (`quantity`) field.
 The quantity type SHOULD be "Standard" (`standard`). The quantity "Measure"
 (`measure`) MUST be "Rating" (`rating`). The quantity "Value" (`value`) for the
-overall score MUST be a whole number between 1 and 50. The quantity "Value"
-(`value`) for each indicator score MUST be a whole number between 1 and 5. The
-quantity "Label" (`label`) MUST be one of the "Allowed quantity labels" listed
-below. The quantity "Units" (`units`) MUST be left blank.
+overall score MUST be a whole number between 1 and 50, which equals the sum of
+the ten indicator values. The quantity "Value" (`value`) for each indicator
+score MUST be a whole number between 1 and 5. The quantity "Label" (`label`)
+MUST be one of the "Allowed quantity labels" listed below. The quantity "Units"
+(`units`) MUST be left blank. All 10 indicators and the overall score MUST be
+included.
 
 **Allowed quantity labels**
 
