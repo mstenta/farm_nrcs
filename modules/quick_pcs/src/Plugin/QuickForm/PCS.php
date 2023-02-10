@@ -100,34 +100,34 @@ class PCS extends QuickFormBase {
     // Create a score field for each indicator.
     $indicators = [
       'desirable_plants' => [
-        'title' => $this->t('Percent Desirable Plants'),
+        'title' => 'Percent Desirable Plants',
       ],
       'percent_legume' => [
-        'title' => $this->t('Percent Legume by Dry Weight'),
+        'title' => 'Percent Legume by Dry Weight',
       ],
       'live_plant_cover' => [
-        'title' => $this->t('Live (includes dormant) Plant Cover'),
+        'title' => 'Live (includes dormant) Plant Cover',
       ],
       'plant_diversity' => [
-        'title' => $this->t('Plant Diversity by Dry Weight'),
+        'title' => 'Plant Diversity by Dry Weight',
       ],
       'plant_residue' => [
-        'title' => $this->t('Plant Residue and Litter as Soil Cover'),
+        'title' => 'Plant Residue and Litter as Soil Cover',
       ],
       'grazing_utilization' => [
-        'title' => $this->t('Grazing Utilization and Severity'),
+        'title' => 'Grazing Utilization and Severity',
       ],
       'livestock_concentration' => [
-        'title' => $this->t('Livestock Concentration Areas'),
+        'title' => 'Livestock Concentration Areas',
       ],
       'soil_compaction' => [
-        'title' => $this->t('Soil Compaction and Soil Regenerative Features'),
+        'title' => 'Soil Compaction and Soil Regenerative Features',
       ],
       'plant_vigor' => [
-        'title' => $this->t('Plant Vigor'),
+        'title' => 'Plant Vigor',
       ],
       'erosion' => [
-        'title' => $this->t('Erosion'),
+        'title' => 'Erosion',
       ],
     ];
     $score_options = range(1, 5);
@@ -194,7 +194,7 @@ class PCS extends QuickFormBase {
         [
           'measure' => 'rating',
           'value' => $score,
-          'label' => $this->t('Overall Score'),
+          'label' => 'Overall Score',
         ],
       ],
       'status' => 'done',
