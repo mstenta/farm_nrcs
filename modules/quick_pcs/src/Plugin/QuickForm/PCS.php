@@ -3,6 +3,7 @@
 namespace Drupal\farm_nrcs_quick_pcs\Plugin\QuickForm;
 
 use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\farm_quick\Plugin\QuickForm\QuickFormBase;
@@ -69,7 +70,7 @@ class PCS extends QuickFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, string $id = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
 
     // Pasture asset reference.
     $form['asset'] = [
@@ -93,7 +94,7 @@ class PCS extends QuickFormBase {
     $form['date'] = [
       '#type' => 'date',
       '#title' => $this->t('Date'),
-      '#default_value' => date('Y-m-d', $this->time->getRequestTime()),
+      '#default_value' => new DrupalDateTime('midnight', \Drupal::currentUser()->getTimeZone()),
       '#required' => TRUE,
     ];
 
