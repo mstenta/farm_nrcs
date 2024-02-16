@@ -1,0 +1,7 @@
+name: farmOS NRCS Practices
+description: Adds a field to assets and logs for specifying NRCS practice codes.
+type: module
+package: farmOS Contrib
+core_version_requirement: ^9 || ^10
+dependencies:
+  - farm_field

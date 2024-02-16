@@ -1,0 +1,170 @@
+<?php
+
+/**
+ * @file
+ * Contains farm_nrcs_practices.module.
+ */
+
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+
+/**
+ * Implements hook_farm_entity_bundle_field_info().
+ */
+function farm_nrcs_practices_farm_entity_bundle_field_info(EntityTypeInterface $entity_type, string $bundle) {
+  $fields = [];
+
+  // Add an NRCS conservation practice field to assets and logs.
+  if (in_array($entity_type->id(), ['asset', 'log'])) {
+    $options = [
+      'type' => 'list_string',
+      'label' => t('NRCS Conservation Practice'),
+      'allowed_values_function' => 'farm_nrcs_practices_field_allowed_values',
+      'multiple' => TRUE,
+    ];
+    $fields['nrcs_practice'] = \Drupal::service('farm_field.factory')->bundleFieldDefinition($options);
+  }
+
+  return $fields;
+}
+
+/**
+ * NRCS Conservations practices list.
+ *
+ * @return array
+ *   Returns an array of NRCS conservations practices keyed by practice code.
+ */
+function farm_nrcs_practices() {
+  return [
+    '311' => 'Alley Cropping',
+    '317' => 'Composting Facility',
+    '318' => 'Short Term Storage of Animal Waste and By‐Products',
+    '319' => 'On‐Farm Secondary Containment Facility',
+    '327' => 'Conservation Cover',
+    '328' => 'Conservation Crop Rotation',
+    '329' => 'Residue and Tillage Management, No Till',
+    '330' => 'Contour Farming',
+    '331' => 'Contour Orchard and Other Perennial Crops',
+    '332' => 'Contour Buffer Strips',
+    '333' => 'Amending Soil Properties with Gypsum Products',
+    '334' => 'Controlled Traffic Farming',
+    '336' => 'Soil Carbon Amendment',
+    '340' => 'Cover Crop',
+    '342' => 'Critical Area Planting',
+    '345' => 'Residue and Tillage Management, Reduced Till',
+    '350' => 'Sediment Basin',
+    '353' => 'Monitoring Well',
+    '355' => 'Groundwater Testing',
+    '359' => 'Waste Treatment Lagoon',
+    '366' => 'Anaerobic Digester',
+    '367' => 'Roofs and Covers',
+    '372' => 'Combustion System Improvement',
+    '374' => 'Energy Efficient Agricultural Operation',
+    '376' => 'Field Operations Emissions Reduction',
+    '378' => 'Pond',
+    '379' => 'Forest Farming',
+    '380' => 'Windbreak/Shelterbelt Establishment and Renovation',
+    '381' => 'Silvopasture',
+    '382' => 'Fence',
+    '383' => 'Fuel Break',
+    '384' => 'Woody Residue Treatment',
+    '386' => 'Field Border',
+    '390' => 'Riparian Herbaceous Cover',
+    '391' => 'Riparian Forest Buffer',
+    '393' => 'Filter Strip',
+    '394' => 'Firebreak',
+    '395' => 'Stream Habitat Improvement and Management',
+    '396' => 'Aquatic Organism Passage',
+    '397' => 'Aquaculture Pond',
+    '398' => 'Fish Raceway or Tank',
+    '399' => 'Fishpond Management',
+    '400' => 'Bivalve Aquaculture Gear and Biofouling Control',
+    '410' => 'Grade Stabilization Structure',
+    '412' => 'Grassed Waterway',
+    '420' => 'Wildlife Habitat Planting',
+    '422' => 'Hedgerow Planting',
+    '423' => 'Hillside Ditch',
+    '484' => 'Mulching',
+    '490' => 'Tree/Shrub Site Preparation',
+    '511' => 'Forage Harvest Management',
+    '512' => 'Pasture and Hay Planting',
+    '516' => 'Livestock Pipeline',
+    '528' => 'Prescribed Grazing',
+    '543' => 'Land Reclamation,  Abandoned Mined Land',
+    '544' => 'Land Reclamation, Currently Mined Land',
+    '548' => 'Grazing Land Mechanical Treatment',
+    '550' => 'Range Planting',
+    '554' => 'Drainage Water Management',
+    '557' => 'Row Arrangement',
+    '561' => 'Heavy Use Area Protection',
+    '562' => 'Recreation Area Improvement',
+    '566' => 'Recreation Land Improvement and Protection',
+    '570' => 'Stormwater Runoff Control',
+    '576' => 'Livestock Shelter Structure',
+    '578' => 'Stream Crossing',
+    '580' => 'Streambank and Shoreline Protection',
+    '584' => 'Channel Bed Stabilization',
+    '585' => 'Stripcropping',
+    '587' => 'Structure for Water Control',
+    '588' => 'Crosswind Ridges',
+    '589' => 'Cross Wind Trap Strips',
+    '590' => 'Nutrient Management',
+    '591' => 'Amendments for Treatment of Agricultural Waste',
+    '592' => 'Feed Management',
+    '595' => 'Pest Management Conservation System',
+    '600' => 'Terrace',
+    '601' => 'Vegetative Barrier',
+    '602' => 'Equitable Relief',
+    '603' => 'Herbaceous Wind Barriers',
+    '604' => 'Saturated Buffer',
+    '605' => 'Denitrifying Bioreactor',
+    '610' => 'Salinity and Sodic Soil Management',
+    '612' => 'Tree/Shrub Establishment',
+    '614' => 'Watering Facility',
+    '633' => 'Waste Recycling',
+    '634' => 'Waste Transfer',
+    '635' => 'Vegetated Treatment Area',
+    '643' => 'Restoration of Rare or Declining Natural Communities',
+    '644' => 'Wetland Wildlife Habitat Management',
+    '645' => 'Upland Wildlife Habitat Management',
+    '647' => 'Early Successional Habitat Development‐Mgt',
+    '650' => 'Windbreak/Shelterbelt Renovation',
+    '654' => 'Road/Trail/Landing Closure and Treatment',
+    '656' => 'Constructed Wetland',
+    '657' => 'Wetland Restoration',
+    '658' => 'Wetland Creation',
+    '659' => 'Wetland Enhancement',
+    '660' => 'Tree‐Shrub Pruning',
+    '666' => 'Forest Stand Improvement',
+    '670' => 'Energy Efficient Lighting System',
+    '672' => 'Energy Efficient Building Envelope',
+    '735' => 'Waste Gasification Facility, interim',
+    '737' => 'Reduced Water and Energy Coffee Conveyance System, interim',
+    '751' => 'Individual Terrace, interim',
+    '782' => 'Phosphorus Removal System, interim',
+    '805' => 'Amending Soil Properties with Lime, interim',
+    '808' => 'Soil Carbon Amendment, interim',
+    '809' => 'Conservation Harvest Management, interim',
+    '810' => 'Annual Forages for Grazing Systems, interim',
+    '812' => 'Raised Beds, interim',
+    '823' => 'Organic Management, interim',
+  ];
+}
+
+/**
+ * Allowed values callback function for the NRCS Practices field.
+ *
+ * @param \Drupal\Core\Field\FieldStorageDefinitionInterface $definition
+ *   The field storage definition.
+ * @param \Drupal\Core\Entity\ContentEntityInterface|null $entity
+ *   The entity being created if applicable.
+ * @param bool $cacheable
+ *   Boolean indicating if the allowed values can be cached. Defaults to TRUE.
+ *
+ * @return array
+ *   Returns an array of allowed values for use in form select options.
+ */
+function farm_nrcs_practices_field_allowed_values(FieldStorageDefinitionInterface $definition, ContentEntityInterface $entity = NULL, bool &$cacheable = TRUE) {
+  return farm_nrcs_practices();
+}
